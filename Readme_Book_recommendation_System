@@ -1,0 +1,68 @@
+# Book Recommender System
+
+A simple book recommendation system built in a Jupyter notebook using **pandas**, **numpy**, and **scikit-learn**. It implements two classic recommendation approaches:
+
+1. **Popularity-Based Recommender** – surfaces the most popular, highly-rated books overall.
+2. **Collaborative Filtering Recommender** – recommends similar books based on user rating patterns, using cosine similarity.
+
+## Dataset
+
+The notebook expects three CSV files in the working directory:
+
+- `Books.csv` — book metadata (ISBN, title, author, image URLs, etc.)
+- `Users.csv` — user information
+- `Ratings.csv` — user ratings for books
+
+This is based on the well-known **Book-Crossing dataset** (commonly used for recommender system tutorials/projects).
+
+## How It Works
+
+### 1. Data Loading & Cleaning
+- Loads `Books.csv`, `Users.csv`, and `Ratings.csv` with pandas.
+- Checks shapes, null values, and duplicates to understand data quality.
+
+### 2. Popularity-Based Recommender
+- Merges ratings with book details on `ISBN`.
+- Computes the number of ratings (`num_ratings`) and average rating (`avg_rating`) per book.
+- Filters to books with **at least 250 ratings**, sorted by highest average rating.
+- Returns the top 50 popular books with title, author, image URL, rating count, and average rating.
+
+### 3. Collaborative Filtering Recommender
+- Filters to "power users" who have rated **more than 200 books**.
+- Filters to "famous books" that have received **at least 50 ratings** from those power users.
+- Builds a **pivot table** (`pt`) of books × users with rating values (missing values filled with 0).
+- Computes **cosine similarity** between books based on their rating vectors.
+- `recommend(book_title)` function: looks up a book in the pivot table and returns the **top 5 most similar books** based on cosine similarity scores.
+
+### Example Usage
+```python
+recommend('1984')
+recommend('The Da Vinci Code')
+recommend('Zoya')
+```
+
+## Requirements
+
+```
+numpy
+pandas
+scikit-learn
+```
+
+Install with:
+```bash
+pip install numpy pandas scikit-learn
+```
+
+## Running the Notebook
+
+1. Place `Books.csv`, `Users.csv`, and `Ratings.csv` in the same directory as the notebook.
+2. Open `Book_recommender_System.ipynb` in Jupyter Notebook / JupyterLab / VS Code.
+3. Run all cells in order.
+4. Call `recommend('<Book Title>')` with any book title present in the filtered pivot table (`pt.index`) to get recommendations.
+
+## Notes & Possible Improvements
+
+- The `recommend()` function will raise an `IndexError` if the given book title isn't in the filtered pivot table (`pt`) — consider adding error handling for unknown titles.
+- The similarity matrix is computed once on the full filtered dataset; for production use, consider persisting the model (e.g., with `pickle`) instead of recomputing it each run.
+- Could be extended with a Flask/Streamlit front-end to make it an interactive web app.
