@@ -1,0 +1,152 @@
+# Linear Regression from Scratch
+
+A hands-on implementation of **Linear Regression from scratch using Python and NumPy**, built to understand the mathematics and optimization process behind linear regression rather than relying on libraries such as Scikit-learn.
+
+The model is trained on a salary dataset, using **Years of Experience** as the input feature and **Salary** as the target variable.
+
+## 📌 Project Overview
+
+This project explores how a simple linear regression model can learn the relationship between an employee's years of experience and their salary.
+
+The dataset is loaded using Pandas:
+
+```python
+ds = pd.read_csv("Linear_Regre_Scratch/Salary_Data.csv")
+
+X = ds["YearsExperience"].values
+Y = ds["Salary"].values
+```
+
+The implementation then trains a custom regression model using gradient-based optimization and records the loss throughout training.
+
+## 🛠️ Technologies Used
+
+* Python
+* NumPy
+* Pandas
+* Matplotlib
+* Jupyter Notebook
+
+## 🧠 Concepts Covered
+
+* Linear Regression
+* Gradient Descent
+* Loss Functions
+* Model Prediction
+* Error Calculation
+* Feature Normalization
+* Iterative Optimization
+* Loss/Convergence Visualization
+
+## 📊 Dataset
+
+The project uses a salary dataset containing:
+
+* `YearsExperience` — independent/input variable
+* `Salary` — dependent/target variable
+
+The dataset contains observations ranging from approximately **1.1 to 10.5 years of experience**.
+
+## ⚙️ Model
+
+The regression model attempts to learn the relationship:
+
+[
+\hat{Y} = wX + b
+]
+
+where:
+
+* `w` = weight/slope
+* `b` = bias/intercept
+* `X` = years of experience
+* `Ŷ` = predicted salary
+
+The model calculates prediction errors and uses them to optimize its parameters.
+
+## 📉 Loss Function
+
+The implementation tracks the training loss in `loss_history`.
+
+The loss is calculated using the squared prediction errors:
+
+[
+J = \frac{1}{2n}\sum_{i=1}^{n}(Y-\hat{Y})^2
+]
+
+The recorded loss values can then be visualized using Matplotlib:
+
+```python
+plt.plot(loss_history)
+```
+
+This provides a visual representation of the model's convergence during training.
+
+## 📈 Training Visualization
+
+The project plots the loss history to observe how the optimization process progresses over iterations.
+
+A decreasing loss indicates that the model is improving its parameters and moving toward a better fit.
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd Linear-Regre-Scratch
+```
+
+### 2. Install dependencies
+
+```bash
+pip install numpy pandas matplotlib jupyter
+```
+
+### 3. Run the notebook
+
+```bash
+jupyter notebook
+```
+
+Open the project's Jupyter Notebook and run the cells sequentially.
+
+## 📁 Project Structure
+
+```text
+Linear-Regre-Scratch/
+│
+├── Salary_Data.csv
+├── Linear_Regression.ipynb
+└── README.md
+```
+
+## 🎯 Purpose
+
+The primary goal of this project is **learning**.
+
+Instead of using a pre-built implementation such as:
+
+```python
+from sklearn.linear_model import LinearRegression
+```
+
+the regression algorithm is implemented manually to understand what happens internally during model training.
+
+This project is part of my journey toward understanding **machine learning algorithms from first principles**.
+
+## 🔮 Future Improvements
+
+* Add train/test data splitting
+* Add R² and MSE evaluation
+* Support multiple features
+* Compare the implementation with Scikit-learn
+* Experiment with different learning rates
+* Improve training visualization
+* Add prediction examples for unseen data
+
+## 👨‍💻 Author
+
+**Swapnil Mandal**
+
+Built as a learning project to explore Machine Learning and understand the mathematics behind algorithms from scratch.
